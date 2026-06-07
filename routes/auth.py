@@ -27,7 +27,7 @@ def signup():
         except IntegrityError:
             db.session.rollback()
             flash("Failed to signup,try again ☹️")
-    return render_template('Signup.html',form = form)
+    return render_template('signup.html',form = form)
         
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
