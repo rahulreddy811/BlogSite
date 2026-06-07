@@ -4,6 +4,7 @@ import os
 def save_and_resize(image_file,UPLOAD_FOLDER,filename):
     path = os.path.join(UPLOAD_FOLDER,filename)
     img = Image.open(image_file)
+    img = img.convert("RGB")
     img.thumbnail((200,200))
     mask = Image.new('L', (200, 200), 0)
     draw = ImageDraw.Draw(mask)
