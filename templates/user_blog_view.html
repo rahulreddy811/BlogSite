@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<hr>
+
+{% set blog = single_blog %}
+
+{% if blog %}
+    <h2>{{ blog.title }}</h2>
+    <p><b>By:</b> {{ blog.username }}</p>
+    <hr>
+    <p style="white-space: pre-line;">{{ content }}</p>
+{% else %}
+    <p>No blog found.</p>
+{% endif %}
+{% endblock %}

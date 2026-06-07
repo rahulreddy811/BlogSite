@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<a href="{{ url_for('auth.logout') }}">
+    <button>Logout</button>
+</a>
+<br>
+
+{% if user and user.profile %}
+   <img 
+    src="{{ url_for('static', filename='uploads/' + user.profile.profile_pic) }}" 
+    style="width:150px; height:150px; border-radius:50%; object-fit:cover;">
+{% else %} 
+    <p>No profile picture</p>
+{% endif %}
+
+<br><br>
+
+<form action="{{ url_for('profile.upload_profile') }}" method="POST" enctype="multipart/form-data">
+    <input type="file" name="profile_pic" required>
+    <button type="submit">Upload</button>
+</form>
+
+<br><br>
+<p>your blogs:</p>
+<br><br>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Action</th>
+    </tr>
+
+    {% for blog in blogs %}
+    <tr>
+        <td>{{ blog.title }}</td>
+        <td>
+            <a href="{{ url_for('profile.single_user_blog', id=blog.id) }}">
+                <button>View</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

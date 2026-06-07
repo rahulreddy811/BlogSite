@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My App</title>
+
+    <style>
+        /* Flash popup container */
+        #flash-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        /* Flash message style */
+        .flash-message {
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            color: black;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Categories */
+        .success { background-color: #28a745; }
+        .error { background-color: #dc3545; }
+        .warning { background-color: #ffc107; color: black; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🔥 Flash Messages (ONLY HERE ONCE) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-popup">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Page Content -->
+    {% block body %}{% endblock %}
+
+    <!-- Auto hide after 3 sec -->
+    <script>
+        setTimeout(() => {
+            const popup = document.getElementById('flash-popup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+        }, 3000);
+    </script>
+
+</body>
+</html>

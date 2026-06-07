@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<hr>
+
+{% if blog %}
+    <h2>{{ blog.title }}</h2>
+    <p><b>By:</b> {{ blog.username }}</p>
+    <hr>
+    <p>{{ content }}</p>
+{% endif %}
+{% endblock %}

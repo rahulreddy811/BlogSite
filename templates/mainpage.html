@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h3>Welcome to blong</h3>
+
+<a href="{{ url_for('blog.create_blog') }}">
+    <button>Create</button>
+</a>
+
+<a href="{{ url_for('profile.gotopro') }}">
+    <button>Profile</button>
+</a>
+
+<a href="{{ url_for('auth.logout') }}">
+    <button>Logout</button>
+</a>
+
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>Username</th>
+        <th>Title</th>
+        <th>Action</th>
+    </tr>
+
+    {% for blog in blogs %}
+    <tr>
+        <td>{{ blog.username }}</td>
+        <td>{{ blog.title }}</td>
+        <td>
+            <!-- ✅ FIX IS HERE -->
+            <a href="{{ url_for('blog.view_single', id=blog.id) }}">
+                <button>View</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+    <p>Blogs count: {{ blogs|length }}</p>
+</table>
+
+<script>
+function showBlog(id) {
+    let row = document.getElementById("blog-" + id);
+
+    if (row.style.display === "none") {
+        row.style.display = "table-row";
+    } else {
+        row.style.display = "none";
+    }
+}
+</script>
+
+{% endblock %}

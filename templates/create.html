@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<p>create a blog</p>
+<br>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.filename.label }}<br>
+        {{ form.filename() }}
+    </p>
+
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title() }}
+    </p>
+
+     <p>
+        {{ form.blogText.label }}<br>
+        {{ form.blogText(rows=6, cols=50) }}
+    </p>
+
+    <p>
+        {{ form.create() }}
+    </p>
+</form>
+{% endblock %}
