@@ -7,7 +7,6 @@ from PIL import Image
 import os
 
 app = Flask(__name__)
-app.secret_key = "abc123"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
@@ -22,14 +21,6 @@ with app.app_context():
 app.register_blueprint(auth)
 app.register_blueprint(blog)
 app.register_blueprint(profile)
-
-def save_and_resize(image_file,filename):
-    path = os.path.join(app.config['UPLOAD_FOLDER',filename])
-    img = Image.open(image_file)
-    img.thumbnail(300,300)
-    img.save(path)
-    return path
-
 
 @app.route('/')
 def homepage():
@@ -50,4 +41,4 @@ def raw():
 
 if __name__ ==  "__main__":
     print("Server is starting")
-    app.run(debug=True,port=8000)
+    app.run(debug=False,port=8000)
